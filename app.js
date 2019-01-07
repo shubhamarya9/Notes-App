@@ -9,7 +9,14 @@ console.log("command:", command);
 console.log(argv);
 
 if (command === "add") {
-  notes.addNote(argv.title, argv.body);
+  var note = notes.addNote(argv.title, argv.body);
+  if (note) {
+    console.log("Note added");
+    console.log(`title: ${note.title}`);
+    console.log(`body: ${note.body}`);
+  } else {
+    console.log("No changes occured");
+  }
 } else if (command === "list") {
   notes.listNote(argv.title);
 } else if (command === "remove") {

@@ -3,7 +3,9 @@ var fetchNotes = () => {
   try {
     const notesString = fs.readFileSync("notes-data.json");
     return JSON.parse(notesString);
-  } catch (e) {}
+  } catch (e) {
+    return [];
+  }
 };
 var saveNotes = notes => {
   fs.writeFileSync("notes-data.json", JSON.stringify(notes));
@@ -16,18 +18,21 @@ var addNote = (title, body) => {
     body
   };
 
-  var duplicateNote = title => note.title === title;
+  var duplicateNote = notes.filter(note => note.title === title);
   if (duplicateNote.length === 0) {
     notes.push(note);
-    saveNotes();
+    saveNotes(notes);
+    return note;
   }
 };
 
 var listNote = title => {
   console.log("listing note", title);
 };
-var removeNote = () => {
-  console.log("Removing notes");
+var removeNote = title => {
+  var notes = fetchNotes();
+  var checkNote = notes.filter(note => note.title !== title);
+  saveNotes(checkNote);
 };
 var readNote = title => {
   console.log("Reading note:", title);
