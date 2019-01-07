@@ -12,8 +12,7 @@ if (command === "add") {
   var note = notes.addNote(argv.title, argv.body);
   if (note) {
     console.log("Note added");
-    console.log(`title: ${note.title}`);
-    console.log(`body: ${note.body}`);
+    notes.logNote(note);
   } else {
     console.log("No changes occured");
   }
@@ -24,5 +23,6 @@ if (command === "add") {
   var message = remove ? "Note was removed" : "No change occured";
   console.log(message);
 } else if (command === "read") {
-  notes.readNote(argv.title);
+  var note = notes.getNote(argv.title);
+  notes.logNote(note);
 } else console.log("Invalid operation");

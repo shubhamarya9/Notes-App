@@ -10,6 +10,11 @@ var fetchNotes = () => {
 var saveNotes = notes => {
   fs.writeFileSync("notes-data.json", JSON.stringify(notes));
 };
+var getNote = title => {
+  var notes = fetchNotes();
+  var checkExist = notes.filter(note => note.title === title);
+  return checkExist[0];
+};
 var addNote = (title, body) => {
   console.log("adding note", title, body);
   var notes = fetchNotes();
@@ -35,14 +40,15 @@ var removeNote = title => {
   saveNotes(checkNote);
   return notes.length !== checkNote.length;
 };
-var readNote = title => {
-  console.log("Reading note:", title);
-};
 
+var logNote = note => {
+  console.log(`Title: ${note.title}`);
+  console.log(`Body: ${note.body}`);
+};
 module.exports = {
   addNote,
-  listNote,
+  getNote,
   removeNote,
-  readNote,
-  saveNotes
+  saveNotes,
+  logNote
 };
