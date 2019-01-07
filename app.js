@@ -20,7 +20,9 @@ if (command === "add") {
 } else if (command === "list") {
   notes.listNote(argv.title);
 } else if (command === "remove") {
-  notes.removeNote(argv.title);
+  var remove = notes.removeNote(argv.title);
+  var message = remove ? "Note was removed" : "No change occured";
+  console.log(message);
 } else if (command === "read") {
   notes.readNote(argv.title);
 } else console.log("Invalid operation");
