@@ -17,7 +17,11 @@ if (command === "add") {
     console.log("No changes occured");
   }
 } else if (command === "list") {
-  notes.listNote(argv.title);
+  var listNote = notes.listNote(argv.title);
+  console.log(`Printing ${listNote.length} notes(s)`);
+  listNote.forEach(note => {
+    notes.logNote(note);
+  });
 } else if (command === "remove") {
   var remove = notes.removeNote(argv.title);
   var message = remove ? "Note was removed" : "No change occured";

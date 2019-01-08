@@ -32,7 +32,7 @@ var addNote = (title, body) => {
 };
 
 var listNote = title => {
-  console.log("listing note", title);
+  return fetchNotes();
 };
 var removeNote = title => {
   var notes = fetchNotes();
@@ -48,6 +48,7 @@ var logNote = note => {
 module.exports = {
   addNote,
   getNote,
+  listNote,
   removeNote,
   saveNotes,
   logNote
